@@ -8,7 +8,7 @@ export const signup = async (req, res) => {
 
         if(!fullName || !username || !email || !password) return res.status(400).json({ error: "All fields are required." })
 
-        const user = await User.find({ $or: [ { email }, { username } ]})
+        const user = await User.findOne({ $or: [ { email }, { username } ]})
         if(user) return res.status(400).json({ error: "Email or username is already in use." })
 
         const salt = await bcrypt.genSalt(10)
@@ -26,6 +26,38 @@ export const signup = async (req, res) => {
         const { password: pass, ...userInfo } = savedUser._doc
 
         res.status(201).json(userInfo)
+        
+    } catch(error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
+export const signin = async (req, res) => {
+    try {
+        const { email, password } = req.body
+
+        const user = await User.findOne({ email })
+        const isPasswordCorrect = await bcrypt.compare(password, user?.password || "")
+
+        if(!user || !isPasswordCorrect) return res.status(400).json({ error: "Email or password is incorrect." })
+
+        generateTokenAndSetCookie(user._id, res)
+        const { password: pass, ...userInfo } = user._doc
+
+        res.status(200).json(userInfo)
+        
+    } catch(error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
+export const signout = async (req, res) => {
+    try {
+        res.cookie("token", "", { maxAge: 0 })
+
+        res.status(200).json({ msg: "User has been successfully signed out." })
         
     } catch(error) {
         console.log(error)
