@@ -6,13 +6,22 @@ export const newConversation = async (req, res) => {
 
         if(!senderId || !receiverId) return res.status(400).json({ error: "SenderId and receiverId are required." })
 
-        const newConversation = new Conversation({
-            participants: [senderId, receiverId]
+        let conversation
+
+        conversation = await Conversation.findOne({
+            participants: { $all: [senderId, receiverId]}
         })
 
-        const savedConversation = await newConversation.save()
+        if(!conversation) {
+            conversation = new Conversation({
+                participants: [senderId, receiverId]
+            })
+            
+            conversation = await conversation.save()
+        }
 
-        res.status(201).json(savedConversation)
+
+        res.status(201).json(conversation)
         
     } catch(error) {
         console.log(error)

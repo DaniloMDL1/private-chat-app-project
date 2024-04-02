@@ -4,3 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.sidebar-conv{
+    height: calc(100vh - 122.9px)
+}

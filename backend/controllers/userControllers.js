@@ -48,16 +48,40 @@ export const updateProfile = async (req, res) => {
 
 export const searchUsers = async (req, res) => {
     try {
-        const users = await User.find({ $or: [
+        const loggedInUserId = req.user.userId
+
+        const users = await User.find({ $and: [
             {
-                fullName: { $regex: req.query.searchTerm, $options: "i"}
+                _id: { $ne: loggedInUserId }
             },
             {
-                username: { $regex: req.query.searchTerm, $options: "i"}
+                $or: [
+                    {
+                        fullName: { $regex: req.query.searchTerm, $options: "i"}
+                    },
+                    {
+                        username: { $regex: req.query.searchTerm, $options: "i"}
+                    }
+                ]
             }
         ]})
 
         res.status(200).json(users)
+        
+    } catch(error) {
+        console.log(error)
+        res.status(500).json({ error: error.message })
+    }
+}
+
+export const getUser = async (req, res) => {
+    try {
+        const { userId } = req.params
+
+        const user = await User.findOne({ _id: userId })
+        if(!user) return res.status(404).json({ error: "User not found." })
+
+        res.status(200).json(user)
         
     } catch(error) {
         console.log(error)
