@@ -15,7 +15,7 @@ const SignInPage = () => {
                                 id="emailInput"
                                 type="text"
                                 placeholder="Email Address"
-                                className="w-full py-1.5 border border-slate-300 outline-none px-2 focus:border-fuchsia-800 rounded-lg"
+                                className="w-full py-1.5 border border-slate-300 outline-none px-2 focus:border-fuchsia-800 rounded-lg focus:ring-0"
                             />
                         </div>
                     </div>
@@ -26,7 +26,7 @@ const SignInPage = () => {
                                 id="passwordInput"
                                 type="password"
                                 placeholder="Password"
-                                className="w-full py-1.5 border border-slate-300 outline-none px-2 focus:border-fuchsia-800 rounded-lg"
+                                className="w-full py-1.5 border border-slate-300 outline-none px-2 focus:border-fuchsia-800 rounded-lg focus:ring-0"
                             />
                         </div>
                     </div>
