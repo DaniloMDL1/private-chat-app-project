@@ -10,8 +10,16 @@ export const usersApi = api.injectEndpoints({
                 body: data
             }),
             invalidatesTags: ["Users"]
+        }),
+        searchUsers: builder.query({
+            query: ({ searchTerm }) => ({
+                url: `${USERS_URL}/search`,
+                method: "GET",
+                params: { searchTerm }
+            }),
+            providesTags: ["Users"]
         })
     })
 })
 
-export const { useUpdateProfileMutation } = usersApi
+export const { useUpdateProfileMutation, useSearchUsersQuery } = usersApi
