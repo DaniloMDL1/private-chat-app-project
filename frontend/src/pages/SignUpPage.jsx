@@ -22,7 +22,6 @@ const SignUpPage = () => {
     const handleSignUp = async (e) => {
         e.preventDefault()
         try {
-
             const res = await signUpApi(inputs).unwrap()
 
             dispatch(signUp({ ...res }))
