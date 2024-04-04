@@ -11,7 +11,7 @@ const Sidebar = () => {
     const { data: conversationsData, isLoading } = useGetConversationsQuery({ userId: user._id })
 
     return (
-        <div className="bg-fuchsia-950 min-h-screen">
+        <div className="bg-fuchsia-950 h-screen">
             <SidebarHeader />
             <SearchUsersInput />
             {isLoading && (
