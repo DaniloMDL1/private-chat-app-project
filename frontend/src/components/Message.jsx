@@ -20,7 +20,7 @@ const Message = ({ message }) => {
                     </div>
                 </div>
             ) : (
-                <div className="flex items-center">
+                <div className="flex items-center mb-5">
                     <div className="flex items-center gap-2 w-5/6">
                         <Avatar img={userData?.profilePicture} size={"md"} rounded/>
                         <div className="bg-zinc-100 text-black p-4 text-sm rounded-lg">

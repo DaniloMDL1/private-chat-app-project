@@ -1,17 +1,24 @@
 import Message from "../models/messageModel.js"
+import { getReceiverSocketId, io } from "../socket/socket.js"
 
 export const newMessage = async (req, res) => {
     try {
-        const { conversationId, senderId, message } = req.body
+        const { conversationId, senderId, message, receiverId } = req.body
 
         if(!conversationId || !senderId || !message) return res.status(400).json({ error: "Message is required." })
 
         const newMessage = new Message({
             conversationId,
             senderId,
-            message
+            message,
+            receiverId
         })
         const savedMessage = await newMessage.save()
+
+        const receiverSocketId = getReceiverSocketId(receiverId)
+        if(receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", savedMessage)
+        }
 
         res.status(201).json(savedMessage)
         

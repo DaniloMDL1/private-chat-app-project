@@ -21,6 +21,8 @@ const MessageInput = () => {
         }
     }
 
+    const receiverId = conversation.participants.find((id) => id !== user._id )
+
     const [ createMessageApi ] = useCreateMessageMutation()
 
     const handleCreateMessage = async (e) => {
@@ -30,7 +32,7 @@ const MessageInput = () => {
             return
         }
         try {
-            const res = await createMessageApi({ conversationId: conversation?._id, senderId: user._id, message }).unwrap()
+            const res = await createMessageApi({ conversationId: conversation?._id, senderId: user._id, message, receiverId }).unwrap()
 
             setMessage("")
             
