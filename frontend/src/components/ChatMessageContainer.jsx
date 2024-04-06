@@ -22,6 +22,15 @@ const ChatMessageContainer = () => {
     }, [socket])
 
     useEffect(() => {
+        
+        socket?.on("deleteMessage", (deleteMessageId) => {
+            refetch()
+        })
+
+        return () => socket?.off("deleteMessage")
+    }, [socket])
+
+    useEffect(() => {
         setTimeout(() => {
             scrollRef.current?.scrollIntoView({ behavior: "smooth" })
         }, 100)

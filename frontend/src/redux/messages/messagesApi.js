@@ -18,7 +18,14 @@ export const messagesApi = api.injectEndpoints({
             }),
             providesTags: ["Messages"]
         }),
+        deleteMessage: builder.mutation({
+            query: ({ messageId }) => ({
+                url: `${MESSAGES_URL}/delete/${messageId}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ["Messages"]
+        })
     })
 })
 
-export const { useCreateMessageMutation, useGetConversationMessagesQuery } = messagesApi
+export const { useCreateMessageMutation, useGetConversationMessagesQuery, useDeleteMessageMutation } = messagesApi

@@ -44,7 +44,7 @@ const MessageInput = () => {
     return (
         <form onSubmit={handleCreateMessage} className="flex items-center justify-center gap-2 py-3 border-t border-slate-100">
             <Avatar img={user.profilePicture} size={"md"} rounded/>
-            <TextInput type="text" value={message} onChange={(e) => setMessage(e.target.value)} theme={searchInputTheme} placeholder="Type something..." className="w-[420px]"/>
+            <TextInput type="text" value={message} onChange={(e) => setMessage(e.target.value)} theme={searchInputTheme} placeholder="Type something..." className="w-[420px] max-md:w-[240px]"/>
             <button>
                 <IoMdSend type="button" size={28} className="text-fuchsia-900 cursor-pointer"/>
             </button>

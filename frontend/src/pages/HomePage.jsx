@@ -15,20 +15,31 @@ const HomePage = () => {
     
 
     return (
-        <div className="flex">
-            <div className="w-1/4">
-                <Sidebar />
+        <>
+            <div className="flex max-md:hidden">
+                <div className="w-1/4">
+                    <Sidebar />
+                </div>
+                <div className="w-3/4">
+                    {selectedConversation ? (
+                        <ChatContainer />
+                    ) : (
+                        <div className="text-4xl text-fuchsia-950 flex justify-center items-center h-screen">
+                            Select a chat to start a conversation.
+                        </div>
+                    )}
+                </div>
             </div>
-            <div className="w-3/4">
-                {selectedConversation ? (
-                    <ChatContainer />
-                ) : (
-                    <div className="text-4xl text-fuchsia-950 flex justify-center items-center h-screen">
-                        Select a chat to start a conversation.
+            <div className="md:hidden">
+                {!selectedConversation ? (
+                    <div className="w-full">
+                        <Sidebar />
                     </div>
+                ) : (
+                    <ChatContainer />
                 )}
             </div>
-        </div>
+        </>
     )
 }
 

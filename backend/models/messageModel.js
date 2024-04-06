@@ -4,8 +4,11 @@ const messageSchema = new mongoose.Schema(
     {
         conversationId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Conversation",
-            required: true
+            ref: "Conversation"
+        },
+        roomId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Room"
         },
         senderId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -14,8 +17,7 @@ const messageSchema = new mongoose.Schema(
         },
         receiverId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true
+            ref: "User"
         },
         message: {
             type: String,
