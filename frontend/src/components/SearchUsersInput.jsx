@@ -30,7 +30,7 @@ const SearchUsersInput = () => {
 
     const handleNewConversation = async (receiverId) => {
         try {
-            const res = await newConversationApi({ senderId: user._id, receiverId })
+            const res = await newConversationApi({ senderId: user._id, receiverId }).unwrap()
             
         } catch(error) {
             if(error.data) {

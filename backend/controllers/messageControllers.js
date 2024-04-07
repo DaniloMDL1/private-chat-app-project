@@ -60,24 +60,3 @@ export const deleteMessage = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-
-export const newRoomMessage = async (req, res) => {
-    try {
-        const { senderId, roomId, message } = req.body
-
-        if(!senderId || !roomId || !message) return res.status(400).json({ error: "Message is required." })
-
-        const newMessage = new Message({
-            senderId,
-            roomId,
-            message
-        })
-        const savedMessage = await newMessage.save()
-
-        res.status(201).json(savedMessage)
-        
-    } catch(error) {
-        console.log(error)
-        res.status(500).json({ error: error.message })
-    }
-}

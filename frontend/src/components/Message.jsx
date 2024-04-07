@@ -31,7 +31,7 @@ const Message = ({ message }) => {
     return (
         <>
             {message.senderId === user._id ? (
-                <div className="flex items-center flex-row-reverse gap-3 mt-5">
+                <div className="flex items-center flex-row-reverse gap-3 mb-5">
                     <div className="text-sm">
                         {format(new Date(message.createdAt), "hh:mm a")}
                     </div>

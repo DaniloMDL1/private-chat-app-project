@@ -33,9 +33,9 @@ export const getConversations = async (req, res) => {
     try {
         const { userId } = req.params
 
-        const conversation = await Conversation.find({ participants: { $in: [userId]}})
+        const conversations = await Conversation.find({ participants: { $in: [userId]}})
 
-        res.status(200).json(conversation)
+        res.status(200).json(conversations)
         
     } catch(error) {
         console.log(error)
