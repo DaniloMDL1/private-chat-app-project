@@ -11,7 +11,7 @@ const Sidebar = () => {
     const { data: conversationsData, isLoading } = useGetConversationsQuery({ userId: user._id })
 
     return (
-        <div className="bg-fuchsia-950 h-screen">
+        <div className="bg-fuchsia-950 h-screen flex flex-col">
             <SidebarHeader />
             <SearchUsersInput />
             {isLoading && (
@@ -24,7 +24,7 @@ const Sidebar = () => {
                     You haven't started any conversation yet.
                 </div>
             )}
-            <div className="sidebar-conv flex flex-col">
+            <div className="flex flex-col flex-1 overflow-auto">
                 {conversationsData && conversationsData.map((c) => (
                     <Conversation key={c._id} conversation={c}/>
                 ))}
