@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(() => {
     if(user && !socket) {
-      const socketInstance = io("http://localhost:3001", {
+      const socketInstance = io("https://private-chat-app-bg6b.onrender.com/", {
         query: {
           userId: user._id
         }
